@@ -66,5 +66,5 @@ SELECT c.titulo AS titulo_serie, temp.numero AS numero_temporada, ep.titulo AS t
 FROM Episodio ep
 JOIN Temporada temp ON ep.id_temporada = temp.id
 JOIN Conteudo c ON c.id = temp.id_conteudo
-WHERE ep.duracao_minutos > 60 OR ep.descricao IS NOT NULL
+WHERE ep.duracao_minutos > 60 OR ep.descricao IS NULL
 ORDER BY c.titulo, temp.numero;

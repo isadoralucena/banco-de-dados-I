@@ -143,6 +143,7 @@ BEGIN
   
 	DELETE FROM Perfil
 	WHERE id = P_ID_PERFIL_ORIGEM;
+	COMMIT;
 END;
 
 -- 5. Function: Implemente uma function chamada FN_TOTAL_HORAS_CONTEUDO. 

@@ -66,7 +66,7 @@ SELECT u.nome, a.nome, a.max_telas, COUNT(p.nome) AS "Quantidade de perfis"
 FROM Usuario u, Assinatura a, Perfil p
 WHERE u.id_assinatura = a.id AND p.id_usuario = u.id
 GROUP BY u.nome, a.nome, a.max_telas
-HAVING COUNT(p.nome) > a.max_telas
+HAVING COUNT(p.nome) > a.max_telas;
 
 -- 6. Quais usuários (Nome e E-mail) que possuem a assinatura “Premium” já 
 -- assistiram a algum conteúdo do gênero “Ficção Científica”? Liste também 
@@ -105,7 +105,7 @@ CREATE VIEW VH_Classificacao_Indicativa_Qtd_Conteudo
 SELECT c.classificacao_indicativa, COUNT(*) 
 FROM Conteudo c
 GROUP BY c.classificacao_indicativa 
-HAVING COUNT(*) > 1
+HAVING COUNT(*) > 1;
 
 -- 9. Crie uma VIEW que encapsule a seguinte consulta: Liste o nome dos 
 -- perfis que assistiram a pelo menos um episódio de absolutamente todas as 
@@ -121,7 +121,7 @@ JOIN Temporada t ON e.id_temporada = t.id
 JOIN Conteudo c ON t.id_conteudo = c.id
 WHERE c.tipo = 'Serie'
 GROUP BY p.id, p.nome
-HAVING COUNT(DISTINCT c.id) = (SELECT COUNT(*) FROM Conteudo WHERE tipo = 'Serie')
+HAVING COUNT(DISTINCT c.id) = (SELECT COUNT(*) FROM Conteudo WHERE tipo = 'Serie');
 
 -- 10. Crie uma VIEW que encapsule a seguinte consulta: Liste o nome e a 
 -- função dos artistas que participaram do filme "O Resgate Final". Filtre o 

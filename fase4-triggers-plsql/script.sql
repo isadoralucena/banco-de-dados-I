@@ -123,8 +123,6 @@ CREATE OR REPLACE PROCEDURE SP_MESCLAR_PERFIS(
 ) 
 IS
 BEGIN
-  -- De forma defensiva, colocamos essa checagem de NULL aqui invés de colocar NOT NULL nos parâmetros
-  -- garantindo que não aconteça nada se as entradas não forem válidas
 	IF P_ID_PERFIL_ORIGEM IS NULL OR P_ID_PERFIL_DESTINO IS NULL 
 		THEN RAISE_APPLICATION_ERROR(
     		-20001, 

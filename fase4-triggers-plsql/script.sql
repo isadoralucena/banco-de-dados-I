@@ -126,11 +126,17 @@ BEGIN
   -- De forma defensiva, colocamos essa checagem de NULL aqui invés de colocar NOT NULL nos parâmetros
   -- garantindo que não aconteça nada se as entradas não forem válidas
 	IF P_ID_PERFIL_ORIGEM IS NULL OR P_ID_PERFIL_DESTINO IS NULL 
-		THEN RETURN;
+		THEN RAISE_APPLICATION_ERROR(
+    		-20001, 
+    		'Parâmetros inválidos para mesclagem.'
+    	);
 	END IF; 
 
 	IF P_ID_PERFIL_ORIGEM = P_ID_PERFIL_DESTINO 
-		THEN RETURN;
+		THEN RAISE_APPLICATION_ERROR(
+    		-20001, 
+    		'Não é possível mesclar o mesmo perfil.'
+    	);
 	END IF;
   
 	UPDATE HISTORICO

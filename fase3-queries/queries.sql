@@ -39,11 +39,11 @@ SELECT c.titulo AS "Nome da série"
 FROM Conteudo c
 JOIN Temporada t ON c.id = t.id_conteudo
 GROUP BY c.id, c.titulo
-HAVING COUNT(*) =
+HAVING COUNT(t.id) =
 (
     SELECT MAX(qtd)
     FROM (
-        SELECT COUNT(*) AS qtd
+        SELECT COUNT(id) AS qtd
         FROM Temporada
         GROUP BY id_conteudo
     )

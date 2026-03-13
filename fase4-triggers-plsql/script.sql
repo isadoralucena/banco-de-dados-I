@@ -40,7 +40,7 @@ BEGIN
 	IF v_classificacao  = 'Livre' THEN
         v_idade_conteudo  := 0;
     ELSE
-        v_idade_conteudo  := TO_NUMBER(v_classificacao );
+        v_idade_conteudo  := TO_NUMBER(v_classificacao);
     END IF;
 
 	IF v_idade_conteudo > v_idade_perfil THEN

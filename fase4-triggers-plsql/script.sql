@@ -176,7 +176,7 @@ BEGIN
 		FROM Historico h 
 		JOIN Episodio e ON e.id = h.id_episodio 
 		JOIN Temporada t ON e.id_temporada = t.id
-		WHERE t.id_conteudo = P_ID_CONTEUDO 
+		WHERE t.id_conteudo = P_ID_CONTEUDO;
 	END IF;
 	RETURN NVL(v_total_minutos_assistidos, 0)/60;
 END;

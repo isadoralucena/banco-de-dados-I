@@ -86,6 +86,10 @@ END;
 -- assistindo a esse título na tabela Historico 
 -- (se for série, ele deve ter assistido pelo menos a um episódio dela)
 
+-- O trigger cobre INSERT OR UPDATE pois a tabela Avaliacao não possui constraint
+-- UNIQUE(id_perfil, id_conteudo), permitindo que um UPDATE altere o id_conteudo
+-- de uma avaliação existente. Nesse caso, é necessário revalidar se o perfil
+-- já assistiu ao novo conteúdo referenciado.
 CREATE OR REPLACE TRIGGER TRG_AVALIACAO_BIU
 BEFORE INSERT OR UPDATE ON Avaliacao
 FOR EACH ROW
@@ -112,10 +116,11 @@ BEGIN
     END IF;
 END;
 
--- 4. Procedure: Implemente SP_MESCLAR_PERFIS. Ela recebe dois parâmetros: 
--- P_ID_PERFIL_ORIGEM e P_ID_PERFIL_DESTINO. A procedure deve transferir todos 
--- os registros de Historico e Avaliacao da origem para o destino 
--- e, em seguida, excluir o perfil de origem. Tudo deve ocorrer na mesma transação
+-- 4. Procedure: Implemente SP_MESCLAR_PERFIS. 
+-- Ela recebe dois parâmetros: P_ID_PERFIL_ORIGEM e P_ID_PERFIL_DESTINO.
+-- A procedure deve transferir todos os registros de Historico e Avaliacao 
+-- da origem para o destino e, em seguida, excluir o perfil de origem. 
+-- Tudo deve ocorrer na mesma transação
 
 CREATE OR REPLACE PROCEDURE SP_MESCLAR_PERFIS(
 	P_ID_PERFIL_ORIGEM NUMBER, 

@@ -88,10 +88,10 @@ END;
 -- assistindo a esse título na tabela Historico 
 -- (se for série, ele deve ter assistido pelo menos a um episódio dela)
 
--- O trigger cobre INSERT OR UPDATE pois a tabela Avaliacao não possui constraint
--- UNIQUE(id_perfil, id_conteudo), permitindo que um UPDATE altere o id_conteudo
--- de uma avaliação existente. Nesse caso, é necessário revalidar se o perfil
--- já assistiu ao novo conteúdo referenciado.
+-- O trigger cobre INSERT e UPDATE porque um UPDATE pode alterar
+-- o id_conteudo ou o id_perfil de uma avaliação existente.
+-- Nesses casos, é necessário validar novamente se o perfil
+-- já assistiu ao conteúdo que está sendo avaliado.
 CREATE OR REPLACE TRIGGER TRG_AVALIACAO_BIU
 BEFORE INSERT OR UPDATE ON Avaliacao
 FOR EACH ROW

@@ -50,6 +50,7 @@ BEGIN
         );
     END IF;
 END;
+/
 
 -- 2. Trigger: Crie um trigger na tabela Perfil que impeça a criação de um novo perfil 
 -- se o usuário já possuir uma quantidade de perfis igual ao limite 
@@ -80,6 +81,7 @@ BEGIN
 		);
 	END IF;
 END;
+/
 
 -- 3. Trigger: Crie um trigger na tabela Avaliacao que garanta que um perfil 
 -- só possa avaliar um conteúdo se existir pelo menos um registro dele 
@@ -115,6 +117,7 @@ BEGIN
     	);
     END IF;
 END;
+/
 
 -- 4. Procedure: Implemente SP_MESCLAR_PERFIS. 
 -- Ela recebe dois parâmetros: P_ID_PERFIL_ORIGEM e P_ID_PERFIL_DESTINO.
@@ -166,6 +169,7 @@ BEGIN
 	WHERE id = P_ID_PERFIL_ORIGEM;
 	COMMIT;
 END;
+/
 
 -- 5. Function: Implemente uma function chamada FN_TOTAL_HORAS_CONTEUDO. 
 -- Ela deve receber o ID de um conteúdo (filme ou série) e retornar um número (NUMBER) 
@@ -197,3 +201,4 @@ BEGIN
 	END IF;
 	RETURN NVL(v_total_minutos_assistidos, 0)/60;
 END;
+/

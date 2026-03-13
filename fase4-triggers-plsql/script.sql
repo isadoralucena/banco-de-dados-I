@@ -141,6 +141,18 @@ BEGIN
     		'Não é possível mesclar o mesmo perfil.'
     	);
 	END IF;
+
+	-- Exclui avaliações do perfil de origem cujo conteúdo já foi avaliado
+	-- pelo perfil de destino. Essa remoção é necessária para evitar violação
+	-- de unicidade da combinação (id_perfil, id_conteudo) quando os registros
+	-- da origem forem atualizados para o perfil de destino.
+	DELETE FROM Avaliacao
+	WHERE id_perfil = P_ID_PERFIL_ORIGEM
+		AND id_conteudo IN (
+	  		SELECT id_conteudo 
+	  		FROM Avaliacao
+	  		WHERE id_perfil = P_ID_PERFIL_DESTINO
+	  );
   
 	UPDATE HISTORICO
 		SET id_perfil = P_ID_PERFIL_DESTINO

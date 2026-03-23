@@ -68,13 +68,33 @@ HAVING COUNT(p.nome) > a.max_telas;
 -- assistiram a algum conteúdo do gênero "Ficção Científica"? Liste também 
 -- o título do conteúdo que eles assistiram
 
-SELECT us.nome AS "Nome do ususário", us.email, c.titulo AS "Título do conteúdo"
+SELECT DISTINCT
+    us.nome AS "Nome do Usuário",
+    us.email AS "Email do Usuário",
+    c.titulo AS "Título do Conteúdo"
 FROM Usuario us
 JOIN Assinatura a ON us.id_assinatura = a.id
 JOIN Perfil p ON us.id = p.id_usuario
 JOIN Historico h ON p.id = h.id_perfil
 JOIN Conteudo c ON h.id_conteudo = c.id
 JOIN Conteudo_Genero cg ON c.id = cg.id_conteudo
+JOIN Genero g ON cg.id_genero = g.id
+WHERE a.nome = 'Premium' AND g.nome = 'Ficção Científica'
+
+UNION
+
+SELECT DISTINCT
+    us.nome AS "Nome do Usuário",
+    us.email AS "Email do Usuário",
+    c.titulo AS "Título do Conteúdo"
+FROM Usuario us
+JOIN Assinatura a ON us.id_assinatura = a.id
+JOIN Perfil p ON us.id = p.id_usuario
+JOIN Historico h ON p.id = h.id_perfil
+JOIN Episodio e ON h.id_episodio = e.id
+JOIN Temporada t ON e.id_temporada = t.id
+JOIN Conteudo c ON t.id_conteudo = c.id
+JOIN Conteudo_Genero cg  ON c.id = cg.id_conteudo
 JOIN Genero g ON cg.id_genero = g.id
 WHERE a.nome = 'Premium' AND g.nome = 'Ficção Científica';
 
